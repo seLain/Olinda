@@ -18,6 +18,12 @@ class GoodJob(IntentHandler):
         return 'Thank you :)'
 
 
+class Hello(IntentHandler):
+
+    def handle(self, intent):
+        return 'Hello. What can I do for you ?'
+
+
 handlers = {}
 g = globals().copy()
 for name, obj in g.items():
