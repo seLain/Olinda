@@ -1,0 +1,37 @@
+import inspect
+
+
+class IntentHandler:
+    def handle(self, intent):
+        return None
+
+
+class Unknown(IntentHandler):
+
+    def handle(self, intent):
+        return "Sorry, I don't understand."
+
+
+class GoodJob(IntentHandler):
+
+    def handle(self, intent):
+        return 'Thank you :)'
+
+
+handlers = {}
+g = globals().copy()
+for name, obj in g.items():
+    if inspect.isclass(obj) and issubclass(obj, IntentHandler) and \
+        not obj == IntentHandler:
+        handlers[name] = obj
+
+
+def dispatch(intent):
+
+    try:
+        if intent.get_name() == 'None':
+            return Unknown().handle(intent)
+        else:
+            return handlers[intent.get_name()]().handle(intent)
+    except KeyError as e:
+        return None

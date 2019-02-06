@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# bot
+bot_settings.py
+.DS_Store
