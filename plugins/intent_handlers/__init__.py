@@ -1,4 +1,8 @@
 import inspect
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class IntentHandler:
@@ -40,4 +44,5 @@ def dispatch(intent):
         else:
             return handlers[intent.get_name()]().handle(intent)
     except KeyError as e:
+        logger.warning('No intent key %s was found.' % intent.get_name())
         return None
